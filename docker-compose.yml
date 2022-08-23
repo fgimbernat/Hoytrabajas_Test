@@ -2,9 +2,9 @@ version: '3.8'
 services:
   db:
     image: postgres:14
+    env_file: ./build/env/db_development.env
     volumes:
       - db:/var/lib/postgresql/data
-    env_file: ./build/env/db_development.env
   web:
     build:
       dockerfile: ./Dockerfile
