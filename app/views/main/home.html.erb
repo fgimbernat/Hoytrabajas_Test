@@ -1,3 +1,4 @@
-<h1>Main#home</h1>
-<p>Find me in app/views/main/home.html.erb</p>
+<h1>Welcome</h1>
+<p>Hello, <%=current_user.email%></p>
+<p>Click <%=link_to 'Here', suppliers_path %> to manage your suppliers</p>
 <%=link_to 'Sign Out', destroy_user_session_path, :method => :delete  %>
