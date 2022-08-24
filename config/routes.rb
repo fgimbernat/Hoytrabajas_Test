@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :suppliers
   get 'main/home'
 
   root "main#home"

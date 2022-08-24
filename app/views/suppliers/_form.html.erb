@@ -1,0 +1,48 @@
+<%= form_with(model: supplier, local: true) do |form| %>
+  <% if supplier.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(supplier.errors.count, "error") %> prohibited this supplier from being saved:</h2>
+
+      <ul>
+      <% supplier.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :supplier_name, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nit %>
+    <%= form.text_field :nit_1, id: :supplier_nit, required: true, maxlength: 9 %> - <%= form.text_field :nit_2, id: :supplier_nit_2, maxlength: 1 %>
+    <% form.text_field :nit, id: :supplier_nit, value: params[:nit2] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_name %>
+    <%= form.text_field :contact_name, id: :supplier_contact_name , required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_num %>
+    <%= form.text_field :contact_num, id: :supplier_contact_num, maxlength: 10 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bank_name %>
+    <%= form.text_field :bank_name, id: :supplier_bank_name, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bank_account %>
+    <%= form.text_field :bank_account, id: :supplier_bank_account, maxlength: 15 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
