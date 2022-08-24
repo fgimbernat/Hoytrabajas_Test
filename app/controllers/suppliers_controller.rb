@@ -5,7 +5,7 @@ class SuppliersController < ApplicationController
 
   # GET /suppliers
   def index
-    @suppliers = Supplier.where(user_id: current_user.id)
+    @suppliers = Supplier.where(user_id: current_user.id).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /suppliers/1
@@ -27,6 +27,7 @@ class SuppliersController < ApplicationController
 
     if @supplier.save
       current_user.suppliers.push(@supplier)
+      Bank.create(name: params[:supplier][:bank_name], account_num: params[:supplier][:bank_account] )
       redirect_to @supplier, notice: 'Supplier was successfully created.'
     else
       render :new
@@ -60,7 +61,14 @@ class SuppliersController < ApplicationController
       
     end
 
+    def valid_float(string)
+      true if Float string rescue false
+    end
+
     def fix_params
+      if !valid_float(params[:supplier][:nit_2]) || !valid_float(params[:supplier][:nit_1])
+        redirect_back(fallback_location: root_path, alert: 'ERROR: NIT debe ser un número')
+      end
       if !params[:supplier][:nit_2].empty?
         params[:supplier][:nit] = "#{params[:supplier][:nit_1]}-#{params[:supplier][:nit_2]}"
         params[:supplier].delete(:nit_2)
