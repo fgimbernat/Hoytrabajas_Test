@@ -27,7 +27,6 @@ class SuppliersController < ApplicationController
 
     if @supplier.save
       current_user.suppliers.push(@supplier)
-      Bank.create(name: params[:supplier][:bank_name], account_num: params[:supplier][:bank_account] )
       redirect_to @supplier, notice: 'Supplier was successfully created.'
     else
       render :new

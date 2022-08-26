@@ -34,7 +34,7 @@
 
   <div class="field">
     <%= form.label :bank_name %>
-    <%= form.text_field :bank_name, id: :supplier_bank_name, required: true %>
+    <%= form.collection_select :bank_name, Bank.order(:name), :name, :name %>
   </div>
 
   <div class="field">
